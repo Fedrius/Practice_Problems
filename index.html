@@ -77,13 +77,44 @@
 */
 
   function bubbleSort() {
-    
+	
 
 
 
 
   }
 
+          // there is a sorting method..
+        //BUBBBLE SORTING
+        var myArray = ['mouse', 'cat', 'dog', 'human','parrot','shark'];
+        // 6-1 = 5.
+
+        function sortArray(arrayInput){
+            var oldArr = arrayInput;
+            var swapped = null;
+
+            //'do'.. always runs once, before checking the while condition
+            do {
+                swapped = false; //if the 'if' in the forloop doesnt run anymore, swapped will remain false, and end the dowhile loop
+
+                //subtracted 1 from length so the loop only iterates through index 0-4 <<(keepin in mind using the pre-constructed array)
+                for (var i=0; i < oldArr.length-1; i++) {
+
+                    //comparing the zero index with the next, then 1st index with next, and so on.
+                    //going to compare the charcode of the first letter in each index
+                    //we want array alphabetically, so swaping if the item 1 is greater than item 2. then swap.
+                    if (oldArr[i] > oldArr[i+1]) {
+                        var temp = oldArr[i]; //temporarily storing the value becuase the 2nd item will be replace the 1st item
+                        oldArr[i] = oldArr[i+1];  //2nd item replaces first
+                        oldArr[i+1] = temp;  // temp which was the first will replace the 2nd item now
+                        swapped = true;  //set swapped at true to keep the dowhile loop going and to initiate the for loop at least one more time and until the array is sorted alphabetically which will be by charcode
+                    }
+                }
+            } while(swapped); //once the forloop doesnt run the 'if' conditional
+
+            return oldArr;
+        }
+        console.log(sortArray(myArray));
 
 /***************************************************************/
 
@@ -118,6 +149,188 @@
   //console.log(randomizeArray([1,2,3,4,5]))
 
 /***************************************************************/
+
+        //reversing a string
+        function reverseString(str) {
+            const splitStr = str.split('');
+            let result = '';
+
+            for(let i = splitStr.length - 1; i >= 0; i--){
+                result += splitStr[i];
+            }
+            return result;
+        }
+        // reverseString("hello");
+
+
+        //factorialize a number
+        function factorialize(num) {
+            let result = 1;
+            for(let i = 1; i <= num; i++){
+                result = result * i;
+            }
+            return result;
+        }
+        // factorialize(5);
+
+
+        //Return true if the given string is a palindrome. Otherwise, return false.
+        //A palindrome is a word or sentence that's spelled the same way both forward and backward,
+        // ignoring punctuation, case, and spacing.
+        function palindrome(str) {
+            let newString = str.replace(/[\W_]/g, '');
+            let front = 0;
+            let back = newString.length - 1;
+
+            while (front < back){
+                if(newString[front].toLowerCase() !== newString[back].toLowerCase()){
+                    return false;
+                }
+                front++;
+                back--;
+            }
+            return true;
+        }
+        // palindrome("not a palindrome");
+
+        //alt solution (slower)
+        function palindromeTwo(str) {
+            return str.replace(/[\W_]/g, '').toLowerCase() ===
+                str.replace(/[\W_]/g, '').toLowerCase().split('').reverse().join('');
+        }
+
+
+        // Return the length of the longest word in the provided sentence.
+        function findLongestWord(str) {
+            let sentence = str.split(' ');
+            let longestWord = sentence[0];
+            for(let i = 1; i < sentence.length; i++){
+                if(sentence[i].length > longestWord.length){
+                    longestWord = sentence[i];
+                }
+            }
+
+            return longestWord.length;
+        }
+        // findLongestWord("The quick brown fox jumped over the lazy dog");
+
+
+        // One of the simplest and most widely known ciphers is a Caesar cipher, also known as a shift cipher. In a shift cipher the meanings of the letters are shifted by some set amount.
+        //
+        // A common modern use is the ROT13 cipher, where the values of the letters are shifted by 13 places. Thus 'A' ↔ 'N', 'B' ↔ 'O' and so on.
+        //
+        // Write a function which takes a ROT13 encoded string as input and returns a decoded string.
+        //
+        //All letters will be uppercase. Do not transform any non-alphabetic character (i.e. spaces, punctuation), but do pass them on.
+        function rot13(str) { // LBH QVQ VG!
+            let result = [];
+
+            for(let i = 0; i < str.length; i++){
+                let char = str.charCodeAt(i);
+                if(char < 65 || char > 90){
+                    result.push(str[i])
+                } else if (char < 78){
+                    result.push(String.fromCharCode(char + 13))
+                } else {
+                    result.push(String.fromCharCode(char - 13))
+                }
+            }
+
+            return result.join('');
+        }
+        // Change the inputs below to test
+        // rot13("SERR PBQR PNZC");
+
+
+        //Create a function that sums two arguments together. If only one argument is provided, then return a function that expects one argument and returns the sum.
+        //For example, addTogether(2, 3) should return 5, and addTogether(2) should return a function.
+        function addTogether(firstNum, secondNum) {
+            if(typeof firstNum === 'number' && typeof secondNum === 'number'){
+
+                return firstNum + secondNum;
+            } else if (typeof firstNum === 'number' && secondNum === undefined){
+
+                return function(secondNum){
+                    if(typeof secondNum === 'number'){
+                        return firstNum + secondNum;
+                    } else {
+                        return undefined;
+                    }
+                }
+            } else if (firstNum === undefined && typeof secondNum === 'number'){
+
+                return function(firstNum){
+                    if(typeof firstNum === 'number'){
+                        return firstNum + secondNum;
+                    } else {
+                        return undefined;
+                    }
+                }
+            } else {
+                return undefined;
+            }
+        }
+        //addTogether(2,2);
+
+        //Check if the predicate (second argument) is truthy on all elements of a collection (first argument).
+        function truthCheck(collection, pre) {
+            for(let i = 0; i < collection.length; i++){
+                if(!collection[i][pre]){
+                    return false;
+                }
+            }
+            return true;
+        }
+        // truthCheck([{"user": "Tinky-Winky",
+        //     "sex": "male"},
+        //
+        //     {"user": "Dipsy",
+        //         "sex": "male"},
+        //
+        //     {"user": "Laa-Laa",
+        //         "sex": "female"},
+        //
+        //     {"user": "Po",
+        //         "sex": "female"}], "sex");
+
+
+        //Compare two arrays and return a new array with any items only found in one of the two given arrays, but not both.
+        //In other words, return the symmetric difference of the two arrays.
+        function diffArray(arr1, arr2) {
+            let newArr = arr1.concat(arr2);
+            let result = [];
+
+            for(let i = 0; i < newArr.length; i++){
+                if(newArr.indexOf(newArr[i]) === newArr.lastIndexOf(newArr[i])){
+                    result.push(newArr[i]);
+                }
+            }
+
+            return result;
+        }
+        //diffArray([1, 2, 3, 5], [1, 2, 3, 4, 5]);
+
+
+        // Return the provided string with the first letter of each word capitalized.
+        //     Make sure the rest of the word is in lower case.
+        function titleCase(str) {
+            let splitStr = str.split(' ');
+
+            for(let i = 0; i < splitStr.length; i++){
+                let firstHalf = splitStr[i].toUpperCase().slice(0, 1);
+
+                if(splitStr[i].length > 1){
+                    let secondHalf = splitStr[i].toLowerCase().slice(1);
+                    splitStr[i] = firstHalf + secondHalf;
+                } else {
+                    splitStr[i] = firstHalf;
+                }
+            }
+
+            return splitStr.join(' ')
+        }
+
+        //console.log(titleCase("I'm a little tea pot"));
 
 </script>
 

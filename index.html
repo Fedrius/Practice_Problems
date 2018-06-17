@@ -2,41 +2,124 @@
 <html>
 <head>
   
-  <script>
-    function largestOfFour(arr) {
-      let result = [];
-      let largestNum = null;
+<script>
+  function largestOfFour(arr) {
+    let result = [];
+    let largestNum = null;
 
-      for (let i = 0; i < arr.length; i++) {
-        largestNum = arr[i][0];
-        for (let k = 1; k < arr[i].length; k++) {
-          if (arr[i][k] > largestNum) {
-            largestNum = arr[i][k];
-          }
+    for (let i = 0; i < arr.length; i++) {
+      largestNum = arr[i][0];
+      for (let k = 1; k < arr[i].length; k++) {
+        if (arr[i][k] > largestNum) {
+          largestNum = arr[i][k];
         }
-        result.push(largestNum);
       }
-      return result;
+      result.push(largestNum);
     }
 
-    // largestOfFour([
-    //     [4, 5, 1, 3],
-    //     [13, 27, 18, 26],
-    //     [32, 35, 37, 39],
-    //     [1000, 1001, 857, 1]
-    // ]);
+    return result;
+  }
 
-    function confirmEnding(str, target) {
-      let endStr = str.substring(str.length - target.length);
+  // largestOfFour([
+  //     [4, 5, 1, 3],
+  //     [13, 27, 18, 26],
+  //     [32, 35, 37, 39],
+  //     [1000, 1001, 857, 1]
+  // ]);
 
-      if (endStr === target) {
-        return true
-      }
-      return false
+  function confirmEnding(str, target) {
+    let endStr = str.substring(str.length - target.length);
+
+    if (endStr === target) {
+      return true
     }
 
-    //(confirmEnding("Bastian", "n"));
-  </script>
+    return false
+  }
+
+  //(confirmEnding("Bastian", "n"));
+
+
+/***************************************************************
+*
+*   Reversing a String
+*   
+*   Input: "reverse me"
+*   
+*   Output: "em esrever"
+*/
+
+  function reverseString(str) {
+    //splits each space in the string into arrays. if it was " ",  it would split each word.
+    let letters = str.split("");
+    let result = [];
+    
+    //start at the end then push each letter into result.
+    for (let i = letters.length - 1; i >= 0; i--) {
+      result.push(letters[i]);
+    }
+
+    //join the arrays into a string and return
+    return result.join("");
+  }
+
+  //console.log(reverseString("reverse me"))
+
+/***************************************************************/
+
+/***************************************************************
+*
+*   Array Bubble Sort Algorithm for numbers and letters (ascending)
+*   
+*   Input: [1,5,2,3,4,6,7,8,9]
+*   
+*   Output: [1,2,3,4,5,6,7,8,9]
+*/
+
+  function bubbleSort() {
+    
+
+
+
+
+  }
+
+
+/***************************************************************/
+
+/***************************************************************
+*
+*   Array Element Randomizer (Durstenfeld shuffle)
+*   
+*   Input: [1,5,2,3,4,6,7,8,9]
+*   
+*   Output: Random set of elements from input array.
+*
+*   Note: easier to visualize on a whiteboard.
+*/
+
+  function randomizeArray(arr) {
+    let result = arr;
+
+    //loop starts at the end.  
+    for (let i = result.length - 1; i > 0; i--) {
+      //generate a random number
+      let randomIndex = Math.floor(Math.random() * (i + 1));
+      //stores current element value
+      let temp = result[i];
+      //switches the current element with the random seleceted element
+      result[i] = result[randomIndex];
+      result[randomIndex] = temp;
+    }
+
+    return result;
+  }
+
+  //console.log(randomizeArray([1,2,3,4,5]))
+
+/***************************************************************/
+
+</script>
 
 </head>
 <body>
